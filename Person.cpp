@@ -5,7 +5,6 @@ using namespace std; // Avoid using std::
 class Person{
 
 protected:
-    static int nextId; // Static variable to give unique id to each person created.
     int id; // to store the unique id of each person.
     string name; // to store the name of the person.
     string password; // to store the password of the person.
@@ -13,22 +12,18 @@ protected:
 public:
     // Default constructor, intializes empty name and password, and assign a unique id to each person using static nextId variable.
     Person(){
-        id = nextId++;
+        id = 0;
         name = "";
         password = "";
 
     }
 
     // Parameterized constructor to initialize name and password, and automatically assign a unique id to each person.
-    Person(string name, string password){
-        id = nextId++;
-        this->name = name;
-        this->password = password;
+    Person(int personId, string personName, string personPassword){
+        id = personId;
+        this->name = personName;
+        this->password = personPassword;
     }
-
-    // virtual destructor, to properly cleanup resources when deleting objects of derived classes through a pointer to Person.
-    virtual ~Person(){}
-
 
     // Getters for Id and Name.
     int getId() const{
@@ -39,17 +34,24 @@ public:
         return name;
     }
 
-    // Function to check if the provided password matches the person's passord.
-    bool checkPassword(string password) const{
-        return this->password == password;
+    string getPassword() const{
+        return password;
     }
 
-    // virtual displayinfo function, has to be implemented by other classes that inherit from Person class.
-    virtual void displayinfo() const = 0;
+    void setName(string newName){
+        name = newName;
+    }
+
+    void setPassword(string newPassword){
+        password = newPassword;
+    }
+
+    void displayInfo() const{
+        cout << "ID: " << id << endl;
+        cout << "Name: " << name << endl;
+    }
 
 
 
     
 };
-// Initialize the static member variable nextId to 1, ensuring that the first person created will have an id of 1.
-int Person::nextId = 1;
