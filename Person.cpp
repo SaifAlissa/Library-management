@@ -19,10 +19,10 @@ public:
         password = "";
     }
 
-    Person(string name, string password) {
+    Person(string personName, string personPassword) {
         id = nextId++;
-        this->name = name;
-        this->password = password;
+        name = personName;
+        password = personPassword;
     }
 
     virtual ~Person() {}
@@ -39,8 +39,8 @@ public:
         return password;
     }
 
-    bool checkPassword(string password) const {
-        return this->password == password;
+    bool checkPassword(string inputPassword) const {
+        return password == inputPassword;
     }
 
     virtual void displayInfo() const = 0;

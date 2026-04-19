@@ -5,10 +5,12 @@
 
 class Librarian : public Person {
 public:
-    Librarian() : Person() {}
+    Librarian() : Person() {
+    }
 
-    Librarian(string name, string password)
-        : Person(name, password) {}
+    Librarian(string librarianName, string librarianPassword)
+        : Person(librarianName, librarianPassword) {
+    }
 
     void displayInfo() const override {
         cout << "Librarian Information" << endl;

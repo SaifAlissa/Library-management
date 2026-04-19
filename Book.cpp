@@ -1,4 +1,3 @@
-
 #ifndef BOOK_CPP
 #define BOOK_CPP
 
@@ -25,8 +24,7 @@ public:
     }
 
     Book(string bookTitle, string bookAuthor, int copies) {
-        id = nextId;
-        nextId++;
+        id = nextId++;
         title = bookTitle;
         author = bookAuthor;
         totalCopies = copies;
@@ -78,7 +76,6 @@ public:
     }
 };
 
-int Book::nextId = 100;
+int Book::nextId = 1;
 
 #endif
->>>>>>> eca626f (work before switching to library)

@@ -5,10 +5,12 @@
 
 class Member : public Person {
 public:
-    Member() : Person() {}
+    Member() : Person() {
+    }
 
-    Member(string name, string password)
-        : Person(name, password) {}
+    Member(string memberName, string memberPassword)
+        : Person(memberName, memberPassword) {
+    }
 
     void displayInfo() const override {
         cout << "Member Information" << endl;

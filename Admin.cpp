@@ -1,4 +1,3 @@
-
 #ifndef ADMIN_CPP
 #define ADMIN_CPP
 
@@ -6,10 +5,12 @@
 
 class Admin : public Person {
 public:
-    Admin() : Person() {}
+    Admin() : Person() {
+    }
 
-    Admin(string name, string password)
-        : Person(name, password) {}
+    Admin(string adminName, string adminPassword)
+        : Person(adminName, adminPassword) {
+    }
 
     void displayInfo() const override {
         cout << "Admin Information" << endl;
@@ -19,4 +20,3 @@ public:
 };
 
 #endif
->>>>>>> eca626f (work before switching to library)

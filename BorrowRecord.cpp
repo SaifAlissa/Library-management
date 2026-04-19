@@ -1,4 +1,3 @@
-
 #ifndef BORROWRECORD_CPP
 #define BORROWRECORD_CPP
 
@@ -42,4 +41,3 @@ public:
 };
 
 #endif
-
