@@ -1,8 +1,3 @@
-#ifndef BORROWRECORD_CPP
-#define BORROWRECORD_CPP
-
-#include <iostream>
-using namespace std;
 
 class BorrowRecord {
 private:
@@ -40,4 +35,3 @@ public:
     }
 };
 
-#endif

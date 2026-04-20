@@ -1,6 +1,5 @@
 #ifndef BOOK_CPP
 #define BOOK_CPP
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -24,7 +23,8 @@ public:
     }
 
     Book(string bookTitle, string bookAuthor, int copies) {
-        id = nextId++;
+        id = nextId;
+        nextId++;
         title = bookTitle;
         author = bookAuthor;
         totalCopies = copies;
@@ -76,6 +76,6 @@ public:
     }
 };
 
-int Book::nextId = 1;
+int Book::nextId = 100;
 
 #endif

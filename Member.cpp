@@ -1,22 +1,33 @@
-#ifndef MEMBER_CPP
-#define MEMBER_CPP
+
 
 #include "Person.cpp"
 
 class Member : public Person {
+private:
+    static int nextId;
+
 public:
     Member() : Person() {
     }
 
     Member(string memberName, string memberPassword)
-        : Person(memberName, memberPassword) {
+        : Person(nextId, memberName, memberPassword) {
+        nextId++;
     }
 
-    void displayInfo() const override {
+    static void setNextId(int value) {
+        nextId = value;
+    }
+
+    static int getNextId() {
+        return nextId;
+    }
+
+    void displayInfo() const {
         cout << "Member Information" << endl;
-        cout << "ID: " << id << endl;
-        cout << "Name: " << name << endl;
+        Person::displayInfo();
     }
 };
 
-#endif
+int Member::nextId = 60;
+

@@ -1,6 +1,3 @@
-#ifndef LIBRARY_CPP
-#define LIBRARY_CPP
-
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -12,20 +9,24 @@ using namespace std;
 #include "Admin.cpp"
 #include "BorrowRecord.cpp"
 
+// Класс библиотеки (library manager)
 class Library {
 private:
+    // Массивы для хранения объектов (arrays for storing objects)
     Book* books[100];
     Member* members[100];
     Librarian* librarians[50];
     Admin* admins[20];
     BorrowRecord* records[500];
 
+    // Счётчики объектов (object counters)
     int bookCount;
     int memberCount;
     int librarianCount;
     int adminCount;
     int recordCount;
 
+    // Проверка: строка это число или нет (check if string is numeric)
     bool isNumber(string text) const {
         if (text.empty()) {
             return false;
@@ -36,10 +37,12 @@ private:
                 return false;
             }
         }
+
         return true;
     }
 
 public:
+    // Конструктор: начальная инициализация (initial setup)
     Library() {
         bookCount = 0;
         memberCount = 0;
@@ -65,6 +68,7 @@ public:
         }
     }
 
+    // Деструктор: очистка памяти (free allocated memory)
     ~Library() {
         for (int i = 0; i < bookCount; i++) {
             delete books[i];
@@ -87,6 +91,7 @@ public:
         }
     }
 
+    // Добавить книгу (add a new book)
     bool addBook(string title, string author, int copies) {
         if (bookCount >= 100 || copies <= 0) {
             return false;
@@ -97,6 +102,7 @@ public:
         return true;
     }
 
+    // Добавить читателя (add a new member)
     bool addMember(string name, string password) {
         if (memberCount >= 100) {
             return false;
@@ -107,6 +113,7 @@ public:
         return true;
     }
 
+    // Добавить библиотекаря (add a new librarian)
     bool addLibrarian(string name, string password) {
         if (librarianCount >= 50) {
             return false;
@@ -117,6 +124,7 @@ public:
         return true;
     }
 
+    // Добавить администратора (add a new admin)
     bool addAdmin(string name, string password) {
         if (adminCount >= 20) {
             return false;
@@ -127,41 +135,50 @@ public:
         return true;
     }
 
+    // Поиск книги по ID (search book by id)
     int searchBook(int id) {
         for (int i = 0; i < bookCount; i++) {
             if (books[i] != nullptr && books[i]->getId() == id) {
                 return i;
             }
         }
+
         return -1;
     }
 
+    // Поиск книги по названию (search book by title)
     int searchBook(string title) {
         for (int i = 0; i < bookCount; i++) {
             if (books[i] != nullptr && books[i]->getTitle() == title) {
                 return i;
             }
         }
+
         return -1;
     }
 
+    // Поиск книги по ID через отдельный метод (wrapper by id)
     int searchBookByID(int id) {
         return searchBook(id);
     }
 
+    // Поиск книги по названию через отдельный метод (wrapper by title)
     int searchBookByTitle(string title) {
         return searchBook(title);
     }
 
+    // Поиск читателя по ID (search member by id)
     int searchMemberById(int id) {
         for (int i = 0; i < memberCount; i++) {
             if (members[i] != nullptr && members[i]->getId() == id) {
                 return i;
             }
         }
+
         return -1;
     }
 
+    // Вход читателя (member login)
     int loginMember(string input, string password) {
         for (int i = 0; i < memberCount; i++) {
             if (members[i] != nullptr) {
@@ -173,7 +190,7 @@ public:
         }
         return -1;
     }
-
+    
     int loginLibrarian(string input, string password) {
         for (int i = 0; i < librarianCount; i++) {
             if (librarians[i] != nullptr) {
@@ -185,7 +202,7 @@ public:
         }
         return -1;
     }
-
+    
     int loginAdmin(string input, string password) {
         for (int i = 0; i < adminCount; i++) {
             if (admins[i] != nullptr) {
@@ -198,8 +215,10 @@ public:
         return -1;
     }
 
+    // Выдать книгу по строке: ID или название (borrow by id/title input)
     bool borrowBook(int memberId, string bookInput) {
         int memberIndex = searchMemberById(memberId);
+
         if (memberIndex == -1) {
             cout << "Member not found." << endl;
             return false;
@@ -223,6 +242,7 @@ public:
             return false;
         }
 
+        // Создать запись о выдаче (create borrow record)
         if (recordCount < 500) {
             records[recordCount] = new BorrowRecord(memberId, books[bookIndex]->getId());
             recordCount++;
@@ -231,10 +251,12 @@ public:
         return true;
     }
 
+    // Выдать книгу по числовому ID (borrow by numeric id)
     bool borrowBook(int memberId, int bookId) {
         return borrowBook(memberId, to_string(bookId));
     }
 
+    // Вернуть книгу (return a book)
     bool returnBook(int memberId, int bookId) {
         int memberIndex = searchMemberById(memberId);
         int bookIndex = searchBookByID(bookId);
@@ -250,7 +272,10 @@ public:
                 records[i]->getBookId() == bookId &&
                 records[i]->isActive()) {
 
+                // Закрыть запись выдачи (close active record)
                 records[i]->deactivate();
+
+                // Вернуть копию книги (return one copy)
                 books[bookIndex]->returnCopy();
                 return true;
             }
@@ -260,6 +285,7 @@ public:
         return false;
     }
 
+    // Показать все книги (show all books)
     void displayAllBooks() const {
         if (bookCount == 0) {
             cout << "No books available." << endl;
@@ -274,6 +300,7 @@ public:
         }
     }
 
+    // Показать только доступные книги (show available books only)
     void displayAvailableBooks() const {
         bool found = false;
 
@@ -290,6 +317,7 @@ public:
         }
     }
 
+    // Поиск книг по ключевому слову (search by keyword)
     void searchBooks(string keyword) const {
         bool found = false;
 
@@ -309,6 +337,7 @@ public:
         }
     }
 
+    // Показать всех читателей (show all members)
     void displayMembers() const {
         if (memberCount == 0) {
             cout << "No members available." << endl;
@@ -323,6 +352,7 @@ public:
         }
     }
 
+    // Показать все записи выдачи (show all borrow records)
     void displayBorrowRecords() const {
         if (recordCount == 0) {
             cout << "No borrow records available." << endl;
@@ -339,6 +369,7 @@ public:
         }
     }
 
+    // Показать статистику системы (show system statistics)
     void displayStatistics() const {
         cout << "Books in library: " << bookCount << endl;
         cout << "Members in library: " << memberCount << endl;
@@ -347,6 +378,7 @@ public:
         cout << "Borrow Records in library: " << recordCount << endl;
     }
 
+    // Показать данные администратора (show admin info)
     void displayAdminInfo(int adminIndex) const {
         if (adminIndex >= 0 && adminIndex < adminCount && admins[adminIndex] != nullptr) {
             admins[adminIndex]->displayInfo();
@@ -355,6 +387,7 @@ public:
         }
     }
 
+    // Показать данные библиотекаря (show librarian info)
     void displayLibrarianInfo(int librarianIndex) const {
         if (librarianIndex >= 0 && librarianIndex < librarianCount && librarians[librarianIndex] != nullptr) {
             librarians[librarianIndex]->displayInfo();
@@ -363,6 +396,7 @@ public:
         }
     }
 
+    // Показать данные читателя (show member info)
     void displayMemberInfo(int memberIndex) const {
         if (memberIndex >= 0 && memberIndex < memberCount && members[memberIndex] != nullptr) {
             members[memberIndex]->displayInfo();
@@ -371,6 +405,7 @@ public:
         }
     }
 
+    // Показать книги, которые сейчас у читателя (show borrowed books of member)
     void displayBorrowedBooksForMember(int memberId) const {
         bool found = false;
 
@@ -397,12 +432,12 @@ public:
         }
     }
 
+    // Получить ID читателя по индексу (get member id by index)
     int getMemberIdByIndex(int memberIndex) const {
         if (memberIndex >= 0 && memberIndex < memberCount && members[memberIndex] != nullptr) {
             return members[memberIndex]->getId();
         }
+
         return -1;
     }
 };
-
-#endif

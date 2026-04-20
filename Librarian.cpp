@@ -4,19 +4,32 @@
 #include "Person.cpp"
 
 class Librarian : public Person {
+private:
+    static int nextId;
+
 public:
     Librarian() : Person() {
     }
 
     Librarian(string librarianName, string librarianPassword)
-        : Person(librarianName, librarianPassword) {
+        : Person(nextId, librarianName, librarianPassword) {
+        nextId++;
     }
 
-    void displayInfo() const override {
+    static void setNextId(int value) {
+        nextId = value;
+    }
+
+    static int getNextId() {
+        return nextId;
+    }
+
+    void displayInfo() const {
         cout << "Librarian Information" << endl;
-        cout << "ID: " << id << endl;
-        cout << "Name: " << name << endl;
+        Person::displayInfo();
     }
 };
+
+int Librarian::nextId = 20;
 
 #endif
