@@ -2,8 +2,10 @@
 #define ADMIN_CPP
 
 #include <iostream>
+#include "Person.cpp"
 #include <string>
 using namespace std;
+
 
 // Admin inherits from Person
 class Admin : public Person {
@@ -19,7 +21,7 @@ public:
     }
 
     // Constructor with name and password
-    Admin(string adminName, string adminPassword) : Person(adminName, adminPassword) {
+    Admin(string adminName, string adminPassword) : Person(nextId, adminName, adminPassword) {
         // Override the ID assigned by Person and use Admin's own nextId
         id = nextId++;
     }
@@ -40,7 +42,7 @@ public:
     }
 
     // Display admin information
-    void displayInfo() const override {
+    void displayInfo() const {
         cout << "===== Admin Information =====" << endl;
         cout << "Admin ID: " << id << endl;
         cout << "Admin Name: " << name << endl;
