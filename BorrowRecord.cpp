@@ -9,7 +9,7 @@ private:
     int bookId; // to keep the books' particular ID.
     bool active; // to keep the book's activity statue.
 public:
-    // Default constructor to intialize the values as the starting point.
+    // Default constructor to initialize the values as the starting point.
     BorrowRecord(){
         memberId=1001;
         bookId=1001;
