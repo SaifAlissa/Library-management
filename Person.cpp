@@ -1,63 +1,63 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-using namespace std;
+#include <iostream> // For input/output (для ввода/вывода)
+#include <string>   // For string handling (для работы со строками)
+using namespace std; // Avoid using std:: (чтобы не писать std::)
 
 class Person {
 protected:
-    int id;             // уникальный ID (unique id)
-    string name;        // имя (name)
-    string password;    // пароль (password)
+    int id;             // unique ID (уникальный ID)
+    string name;        // name (имя)
+    string password;    // password (пароль)
 
 public:
-    // Конструктор по умолчанию (default constructor)
+    // Default constructor (конструктор по умолчанию)
     Person() {
-        id = 0;
-        name = "";
-        password = "";
+        id = 0;        // initial ID value (начальное значение ID)
+        name = "";     // empty name (пустое имя)
+        password = ""; // empty password (пустой пароль)
     }
 
-    // Конструктор с параметрами (parameterized constructor)
+    // Parameterized constructor (конструктор с параметрами)
     Person(int personId, string personName, string personPassword) {
-        id = personId;
-        name = personName;
-        password = personPassword;
+        id = personId;        // set ID (установить ID)
+        name = personName;    // set name (установить имя)
+        password = personPassword; // set password (установить пароль)
     }
 
-    // Получить ID (get id)
+    // Get ID (получить ID)
     int getId() const {
-        return id;
+        return id; // return ID (вернуть ID)
     }
 
-    // Получить имя (get name)
+    // Get name (получить имя)
     string getName() const {
-        return name;
+        return name; // return name (вернуть имя)
     }
 
-    // Получить пароль (get password)
+    // Get password (получить пароль)
     string getPassword() const {
-        return password;
+        return password; // return password (вернуть пароль)
     }
 
-    // Проверка пароля (check password)
+    // Check password (проверка пароля)
     bool checkPassword(string inputPassword) const {
-        return password == inputPassword;
+        return password == inputPassword; // compare passwords (сравнить пароли)
     }
 
-    // Установить имя (set name)
+    // Set name (установить имя)
     void setName(string newName) {
-        name = newName;
+        name = newName; // update name (обновить имя)
     }
 
-    // Установить пароль (set password)
+    // Set password (установить пароль)
     void setPassword(string newPassword) {
-        password = newPassword;
+        password = newPassword; // update password (обновить пароль)
     }
 
-    // Вывод информации (display info)
+    // Display info (вывод информации)
     virtual void displayInfo() const {
-        cout << "ID: " << id << endl;
-        cout << "Name: " << name << endl;
+        cout << "ID: " << id << endl;     // print ID (вывод ID)
+        cout << "Name: " << name << endl; // print name (вывод имени)
     }
 };

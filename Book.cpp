@@ -1,81 +1,73 @@
-#ifndef BOOK_CPP
-#define BOOK_CPP
-#include <iostream>
-#include <string>
-using namespace std;
+#pragma once
 
-class Book {
+#include <iostream> // For input/output (для ввода/вывода)
+#include <string>   // For string handling (для работы со строками)
+using namespace std; // Avoid using std:: (чтобы не писать std::)
+
+// Book class represents a library book (класс Book представляет книгу в библиотеке)
+class Book
+{
 private:
-    static int nextId;
-    int id;
-    string title;
-    string author;
-    int totalCopies;
-    int availableCopies;
+    static int nextId; // Static counter for unique IDs (статический счётчик для уникальных ID)
+    int id; // Unique book ID (уникальный ID книги)
+    string title; // Book title (название книги)
+    string author; // Book author (автор книги)
+    int totalCopies; // Total number of copies (общее количество копий)
+    int availableCopies; // Available copies (доступные копии)
 
 public:
-    Book() {
-        id = 0;
-        title = "";
-        author = "";
+    // Default constructor creates empty book (конструктор по умолчанию создаёт пустую книгу)
+    Book(){
+        id = nextId++; // Assign unique ID (присваиваем уникальный ID)
+        title = "Unknown";
+        author = "Unknown";
         totalCopies = 0;
         availableCopies = 0;
     }
 
-    Book(string bookTitle, string bookAuthor, int copies) {
-        id = nextId;
-        nextId++;
+    // Parameterized constructor creates a specific book (конструктор с параметрами создаёт книгу)
+    Book(string bookTitle, string bookAuthor, int copies){
+        id = nextId++; // Assign unique ID (присваиваем уникальный ID)
         title = bookTitle;
         author = bookAuthor;
         totalCopies = copies;
-        availableCopies = copies;
+        availableCopies = copies; // All copies are available initially (все копии сначала доступны)
     }
 
-    int getId() const {
-        return id;
-    }
+    // Getters return values without modifying object (геттеры возвращают значения)
+    int getId() const { return id; }
+    string getTitle() const { return title; }
+    string getAuthor() const { return author; }
+    int getTotalCopies() const { return totalCopies; }
+    int getAvailableCopies() const { return availableCopies; }
 
-    string getTitle() const {
-        return title;
-    }
-
-    string getAuthor() const {
-        return author;
-    }
-
-    int getTotalCopies() const {
-        return totalCopies;
-    }
-
-    int getAvailableCopies() const {
-        return availableCopies;
-    }
-
-    bool borrowCopy() {
-        if (availableCopies > 0) {
-            availableCopies--;
+    // Borrow a copy if available (взять книгу если есть доступные копии)
+    bool borrowCopy(){
+        if(availableCopies > 0){
+            availableCopies--; // Decrease available copies (уменьшаем количество)
             return true;
         }
-        return false;
+        return false; // No copies left (нет доступных копий)
     }
 
-    bool returnCopy() {
-        if (availableCopies < totalCopies) {
-            availableCopies++;
+    // Return a copy if not full (вернуть книгу если есть место)
+    bool returnCopy(){
+        if(availableCopies < totalCopies){
+            availableCopies++; // Increase available copies (увеличиваем количество)
             return true;
         }
-        return false;
+        return false; // All copies already returned (все копии уже в библиотеке)
     }
 
-    void displayInfo() const {
-        cout << "Book ID: " << id << endl;
-        cout << "Title: " << title << endl;
-        cout << "Author: " << author << endl;
-        cout << "Total Copies: " << totalCopies << endl;
-        cout << "Available Copies: " << availableCopies << endl;
+    // Display book information (вывод информации о книге)
+    void displayInfo() const{
+        cout << "ID: " << id
+             << ", Title: " << title
+             << ", Author: " << author
+             << ", Available: "
+             << availableCopies << "/" << totalCopies << endl;
     }
 };
 
-int Book::nextId = 100;
-
-#endif
+// Initialize static ID counter (инициализация статического счётчика)
+int Book::nextId = 1000;
