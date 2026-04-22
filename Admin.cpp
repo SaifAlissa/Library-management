@@ -1,56 +1,51 @@
-#ifndef ADMIN_CPP
-#define ADMIN_CPP
+#pragma once
 
 #include <iostream>
-#include "Person.cpp"
 #include <string>
+#include "Person.cpp"
 using namespace std;
 
-
-// Admin inherits from Person
+// Класс Admin наследуется от Person
+// Admin class inherits from Person
 class Admin : public Person {
 private:
-    // Static variable for generating Admin IDs
-    static int nextId;
+    static int nextId; // следующий доступный ID (next available ID)
 
 public:
+    // Конструктор по умолчанию
     // Default constructor
-    Admin() : Person() {
-        // Override the ID assigned by Person and use Admin's own nextId
-        id = nextId++;
+    Admin() : Person(nextId, "", "") {
+        nextId++; // увеличиваем ID (increment ID)
     }
 
-    // Constructor with name and password
-    Admin(string adminName, string adminPassword) : Person(nextId, adminName, adminPassword) {
-        // Override the ID assigned by Person and use Admin's own nextId
-        id = nextId++;
+    // Конструктор с параметрами (имя и пароль)
+    // Constructor with parameters (name and password)
+    Admin(string adminName, string adminPassword)
+        : Person(nextId, adminName, adminPassword) {
+        nextId++; // увеличиваем ID (increment ID)
     }
 
-    // Destructor
-    ~Admin() {}
-
-    // Set the next available Admin ID manually
-    static void setNextId(int value) {
-        if (value > 0) {
-            nextId = value;
-        }
-    }
-
-    // Get the next available Admin ID
+    // Получить следующий ID
+    // Get next available ID
     static int getNextId() {
         return nextId;
     }
 
+    // Установить следующий ID
+    // Set next available ID
+    static void setNextId(int value) {
+        if (value > 0) nextId = value;
+    }
+
+    // Вывод информации об администраторе
     // Display admin information
     void displayInfo() const {
         cout << "===== Admin Information =====" << endl;
         cout << "Admin ID: " << id << endl;
         cout << "Admin Name: " << name << endl;
-        cout << "Admin Password: " << password << endl;
     }
 };
 
-// Initial value of static member
+// Инициализация статической переменной
+// Initialization of static variable
 int Admin::nextId = 1;
-
-#endif
