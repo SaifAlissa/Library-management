@@ -1,40 +1,34 @@
-#pragma once
+#ifndef LIBRARIAN_CPP
+#define LIBRARIAN_CPP
+#include "Person.cpp" // Librarian inherits common (id, name, password) from Person
 
-#include "Person.cpp" // Include base class Person (подключаем базовый класс Person)
-
-// Librarian class inherits from Person (класс Librarian наследуется от Person)
 class Librarian : public Person {
 private:
-    static int nextId; // Static counter for unique IDs (статический счётчик для уникальных ID)
+    static int nextId; // Shared counter to generate unique librarian IDs
 
 public:
-    // Default constructor (конструктор по умолчанию)
     Librarian() : Person() {
     }
 
-    // Parameterized constructor sets name and password and assigns unique ID
-    // (конструктор с параметрами устанавливает имя, пароль и уникальный ID)
     Librarian(string librarianName, string librarianPassword)
-        : Person(nextId, librarianName, librarianPassword) {
-        nextId++; // Increment ID for next librarian (увеличиваем ID для следующего библиотекаря)
+        : Person(nextId, librarianName, librarianPassword) { // Sends ID, name and password to Person constructor
+        nextId++; // Prepare next unique ID for the next librarian
     }
 
-    // Set next available ID manually (установить следующий ID вручную)
     static void setNextId(int value) {
         nextId = value;
     }
 
-    // Get next available ID (получить следующий доступный ID)
     static int getNextId() {
         return nextId;
     }
 
-    // Display librarian information (вывод информации о библиотекаре)
     void displayInfo() const {
-        cout << "Librarian Information" << endl;
-        Person::displayInfo(); // Call base class method (вызов метода базового класса)
+        cout << "===== Librarian Information =====" << endl;
+        Person::displayInfo(); // Reuse Person display for ID and name
     }
 };
 
-// Initialize static ID counter starting from 20 (инициализация счётчика ID с 20)
-int Librarian::nextId = 20;
+int Librarian::nextId = 20; // Librarian IDs starts from 20
+
+#endif

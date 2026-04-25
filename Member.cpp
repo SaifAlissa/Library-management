@@ -32,7 +32,7 @@ public:
 
     // Display member information (вывод информации о пользователе)
     void displayInfo() const {
-        cout << "Member Information" << endl; // Header text (заголовок)
+        cout << "===== Member Information =====" << endl; // Header text (заголовок)
         Person::displayInfo(); // Call base class method (вызов метода базового класса)
     }
 };
