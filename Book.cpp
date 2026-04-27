@@ -1,5 +1,4 @@
-#ifndef BOOK_CPP
-#define BOOK_CPP
+
 #include <iostream> // For the input or the output
 #include <string> // Used to handle the strings
 using namespace std; // to avoid using std::
@@ -65,4 +64,4 @@ public:
 
 // Initialize the static ID counter to start at 100
 int Book::nextId=100;
-#endif
+

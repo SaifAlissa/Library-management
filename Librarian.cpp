@@ -1,5 +1,3 @@
-#ifndef LIBRARIAN_CPP
-#define LIBRARIAN_CPP
 #include "Person.cpp" // Librarian inherits common (id, name, password) from Person
 
 class Librarian : public Person {
@@ -31,4 +29,3 @@ public:
 
 int Librarian::nextId = 20; // Librarian IDs starts from 20
 
-#endif

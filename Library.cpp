@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include <iostream> // For input/output (для ввода и вывода)
 #include <string>   // For string operations (для работы со строками)

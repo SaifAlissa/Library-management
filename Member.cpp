@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include "Person.cpp" // Include base class Person (подключаем базовый класс Person)
 

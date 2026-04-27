@@ -1,5 +1,4 @@
-#ifndef BORROWRECORD_CPP
-#define BORROWRECORD_CPP
+
 #include <iostream> // For the input or the output
 #include <string> // Used to handle the strings
 using namespace std; // to avoid using std::
@@ -37,4 +36,4 @@ public:
         active=false;
     }
 };
-#endif
+
