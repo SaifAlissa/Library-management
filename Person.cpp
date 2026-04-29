@@ -25,37 +25,37 @@ public:
         password = personPassword; // set password 
     }
 
-    // Get ID (получить ID)
+    // Get ID 
     int getId() const {
         return id; // return ID 
     }
 
-    // Get name (получить имя)
+    // Get name 
     string getName() const {
         return name; // return name 
     }
 
-    // Get password (получить пароль)
+    // Get password 
     string getPassword() const {
         return password; // return password 
     }
 
-    // Check password (проверка пароля)
+    // Check password 
     bool checkPassword(string inputPassword) const {
         return password == inputPassword; // compare passwords 
     }
 
-    // Set name (установить имя)
+    // Set name 
     void setName(string newName) {
         name = newName; // update name 
     }
 
-    // Set password (установить пароль)
+    // Set password 
     void setPassword(string newPassword) {
         password = newPassword; // update password 
     }
 
-    // Display info (вывод информации)
+    // Display info 
     virtual void displayInfo() const {
         cout << "ID: " << id << endl;     // print ID 
         cout << "Name: " << name << endl; // print name 
