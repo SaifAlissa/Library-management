@@ -57,10 +57,14 @@ public:
     }
 
     // Displays the formatted book details to the console
-    void displayInfo() const{ cout<<"ID: "<<id<<", Title: "<<title
-        <<", Author: "<<author<<", Available: "
-        <<availableCopies<<"/"<<totalCopies<<endl;}
+    friend void displayInfo(Book book);
 };
+
+void displayInfo(Book book) {
+    cout << "ID: " << book.id << ", Title: " << book.title
+         << ", Author: " << book.author << ", Available: "
+         << book.availableCopies << "/" << book.totalCopies << endl;}
+
 
 // Initialize the static ID counter to start at 100
 int Book::nextId=100;

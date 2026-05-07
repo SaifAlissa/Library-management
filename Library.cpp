@@ -300,7 +300,7 @@ public:
         for (int i = 0; i < bookCount; i++) { // Loop through books (проходим по книгам)
             if (books[i] != nullptr) {
                 cout << "----------------------" << endl; // Separator (разделитель)
-                books[i]->displayInfo(); // Show book info (показываем книгу)
+                displayInfo(*books[i]); // Show book info (показываем книгу)
             }
         }
     }
@@ -312,7 +312,7 @@ public:
         for (int i = 0; i < bookCount; i++) {
             if (books[i] != nullptr && books[i]->getAvailableCopies() > 0) {
                 cout << "----------------------" << endl;
-                books[i]->displayInfo();
+                displayInfo(*books[i]);
                 found = true;
             }
         }
@@ -331,7 +331,7 @@ public:
                 if (books[i]->getTitle().find(keyword) != string::npos ||
                     books[i]->getAuthor().find(keyword) != string::npos) { // Match found (найдено совпадение)
                     cout << "----------------------" << endl;
-                    books[i]->displayInfo();
+                    displayInfo(*books[i]);
                     found = true;
                 }
             }
@@ -424,7 +424,7 @@ public:
                 for (int j = 0; j < bookCount; j++) {
                     if (books[j] != nullptr && books[j]->getId() == borrowedBookId) {
                         cout << "----------------------" << endl;
-                        books[j]->displayInfo();
+                        displayInfo(*books[j]);
                         found = true;
                         break;
                     }
